@@ -107,9 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	const fc2 = document.getElementById('fc2');
 	const fc3 = document.getElementById('fc3');
 	if (fc1 && fc2 && fc3) {
-		fc1.style.left = '8%'; fc1.style.top = '-40px';
-		fc2.style.left = '40%'; fc2.style.top = '10px';
-		fc3.style.right = '10%'; fc3.style.top = '-20px';
+		fc1.style.left = '8%'; fc1.style.top = '-90px';
+		fc2.style.left = '40%'; fc2.style.top = '-30px';
+		fc3.style.right = '10%'; fc3.style.top = '-90px';
 		gsap.to(fc1, { y: -10, duration: 2.2, yoyo: true, repeat: -1, ease: 'sine.inOut' });
 		gsap.to(fc2, { y: -12, duration: 2.8, yoyo: true, repeat: -1, ease: 'sine.inOut' });
 		gsap.to(fc3, { y: -8, duration: 2.4, yoyo: true, repeat: -1, ease: 'sine.inOut' });

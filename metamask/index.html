@@ -8,6 +8,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="../shared/styles.css" />
+	<script src="../shared/auth.js"></script>
 	<style>
 		.scene-wrap { position: relative; height: 76vh; border-bottom: 1px solid var(--border); overflow: hidden; }
 		.scene-wrap::before {
@@ -45,8 +46,8 @@
 			filter: blur(50px); mix-blend-mode: screen; left: 50%; transform: translateX(-50%); top: -260px;
 		}
 		.float-cards { position: relative; margin-top: -80px; }
-		.float-card { position:absolute; padding:16px 18px; border-radius:14px; border:1px solid rgba(124,92,255,0.25); box-shadow: 0 10px 30px rgba(124,92,255,0.25), 0 0 120px rgba(124,92,255,0.12);
-			background: linear-gradient(135deg, #2a0f4d, #4a1c7a);
+		.float-card { position:absolute; padding:20px 22px; border-radius:14px; border:1px solid rgba(124,92,255,0.25); box-shadow: 0 10px 30px rgba(124,92,255,0.25), 0 0 120px rgba(124,92,255,0.12);
+			background: linear-gradient(135deg, #2a0f4d, #4a1c7a); cursor: pointer;
 		}
 		.float-card.small { font-size: 16px; color: var(--muted); font-weight: 600; }
 		/* Full-page starfield for Home */
@@ -73,10 +74,11 @@
 			<div class="nav-links">
 				<a class="nav-link" href="../metamask/index.html">Home</a>
 				<a class="nav-link" href="../leaderboard/index.html">Leaderboard</a>
-				<a class="nav-link" href="../upload-bounty/index.html">Upload Bounty</a>
-				<a class="nav-link" href="../bounties/index.html">Bounties</a>
+				<a class="nav-link" href="../upload-bounty/index.html" data-hide-specialist>Upload Bounty</a>
+				<a class="nav-link" href="../bounties/index.html" data-hide-company>Bounties</a>
 				<a class="nav-link" href="../wallet/index.html">Wallet</a>
-				<a class="btn" href="../hunt/index.html">Start Hunting</a>
+				<a class="nav-link" href="../profile/index.html">Profile</a>
+				<a class="btn" href="../hunt/index.html" data-hide-company>Start Hunting</a>
 			</div>
 		</div>
 	</nav>
@@ -85,17 +87,17 @@
 		<canvas id="scene"></canvas>
 		<div class="scene-overlay">
 			<div class="hero">
-				<h1 style="margin:0 0 10px;">Secure the future of the open web</h1>
-				<p style="color:var(--muted); max-width:720px; margin:0 auto">A Metamask-inspired experience in a darker, neon-infused aesthetic. Smooth motion, lightweight 3D, and playful accents — reimagined for Defend X.</p>
+				<h1 style="margin:0 0 10px;">One Platform. Infinite Defenders</h1>
+				<p style="color:var(--muted); max-width:720px; margin:0 auto">Where hackers hunt bugs while companies buy peace of mind</p>
 			</div>
 		</div>
 		<div class="glow"></div>
 	</section>
 
 	<div class="container float-cards">
-		<div class="float-card" id="fc1">Realtime payouts</div>
-		<div class="float-card small" id="fc2">Multi-chain wallet support</div>
-		<div class="float-card" id="fc3">On-chain proofs</div>
+		<a class="float-card" id="fc1" href="../realtime/index.html" style="color:inherit;">Realtime payouts</a>
+		<a class="float-card small" id="fc2" href="../wallet/index.html" style="color:inherit;">Multi-chain wallet support</a>
+		<a class="float-card" id="fc3" href="../onchain/index.html" style="color:inherit;">On-chain proofs</a>
 	</div>
 
 	<div class="container" style="margin-top:120px;">

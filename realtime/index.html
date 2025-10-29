@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Defend X — Realtime Payouts</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../shared/styles.css" />
+	<script src="../shared/auth.js"></script>
+	<style>
+		body.realtime {
+			background-color: #090c12;
+			background-image:
+				radial-gradient(1200px 800px at 50% -10%, rgba(124,92,255,0.12), transparent 60%),
+				linear-gradient(180deg, #090c12 0%, #0b0f14 100%);
+		}
+		.vouches { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+		.vouch { grid-column: span 6; }
+		.badge { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid var(--border); background: rgba(255,255,255,0.06); color: var(--muted); font-size: 12px; }
+	</style>
+</head>
+<body class="realtime">
+	<nav class="nav">
+		<div class="nav-inner container">
+			<div class="brand"><div class="brand-badge"></div> Defend X</div>
+			<div class="nav-links">
+				<a class="nav-link" href="../metamask/index.html">Home</a>
+				<a class="nav-link" href="../leaderboard/index.html">Leaderboard</a>
+				<a class="nav-link" href="../upload-bounty/index.html" data-hide-specialist>Upload Bounty</a>
+				<a class="nav-link" href="../bounties/index.html" data-hide-company>Bounties</a>
+				<a class="nav-link" href="../wallet/index.html">Wallet</a>
+				<a class="nav-link" href="../profile/index.html">Profile</a>
+				<a class="btn" href="../hunt/index.html" data-hide-company>Start Hunting</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="hero" style="padding-bottom: 0;">
+			<h1>Realtime Payouts — Public Vouches</h1>
+			<p style="color:var(--muted);">Independent testimonials and timestamps demonstrating that rewards are paid out fast.</p>
+			<div class="badge">Verified by community</div>
+		</div>
+
+		<div class="vouches">
+			<div class="card vouch">
+				<div style="display:flex; align-items:center; gap:12px;">
+					<div class="avatar-small" style="width:40px;height:40px;">S</div>
+					<div>
+						<div style="font-weight:700;">Specter</div>
+						<div style="color:var(--muted); font-size:12px;">Paid in 12 minutes • 0.15 ETH</div>
+					</div>
+				</div>
+				<p style="margin:12px 0 0; color:var(--muted);">Submitted critical XSS with PoC; funds arrived before I finished the write-up. Smooth.</p>
+			</div>
+
+			<div class="card vouch">
+				<div style="display:flex; align-items:center; gap:12px;">
+					<div class="avatar-small" style="width:40px;height:40px;">H</div>
+					<div>
+						<div style="font-weight:700;">HexGuard</div>
+						<div style="color:var(--muted); font-size:12px;">Paid in 9 minutes • $1,200 USDC</div>
+					</div>
+				</div>
+				<p style="margin:12px 0 0; color:var(--muted);">Fastest payout I have seen on any platform. Clear communication and automation.</p>
+			</div>
+
+			<div class="card vouch">
+				<div style="display:flex; align-items:center; gap:12px;">
+					<div class="avatar-small" style="width:40px;height:40px;">N</div>
+					<div>
+						<div style="font-weight:700;">NovaBank</div>
+						<div style="color:var(--muted); font-size:12px;">Program payout • $3,500 USDC</div>
+					</div>
+				</div>
+				<p style="margin:12px 0 0; color:var(--muted);">Our team appreciates the rapid triage-to-payout pipeline—keeps researchers engaged.</p>
+			</div>
+
+			<div class="card vouch">
+				<div style="display:flex; align-items:center; gap:12px;">
+					<div class="avatar-small" style="width:40px;height:40px;">O</div>
+					<div>
+						<div style="font-weight:700;">Orion Cloud</div>
+						<div style="color:var(--muted); font-size:12px;">Program payout • 0.25 ETH</div>
+					</div>
+				</div>
+				<p style="margin:12px 0 0; color:var(--muted);">Automation removed delays and errors—payouts are traceable and instant.</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">© <span id="year"></span> Defend X</div>
+	<script src="../shared/storage.js"></script>
+	<script>document.addEventListener('DOMContentLoaded',()=>{document.getElementById('year').textContent=String(new Date().getFullYear());});</script>
+</body>
+</html>

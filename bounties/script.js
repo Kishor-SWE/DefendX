@@ -41,6 +41,24 @@ document.addEventListener('DOMContentLoaded', () => {
 	closeModal.addEventListener('click', () => { modal.style.display = 'none'; document.body.style.overflow = ''; });
 	modal.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; document.body.style.overflow = ''; } });
 
+	const filesInput = document.getElementById('r_files');
+	const filesName = document.getElementById('r_files_name');
+	const triggerFiles = document.querySelector('label .file-input .trigger');
+	if (triggerFiles) {
+		triggerFiles.addEventListener('click', () => filesInput && filesInput.click());
+	}
+	if (filesInput) {
+		filesInput.addEventListener('change', () => {
+			if (filesInput.files && filesInput.files.length) {
+				const names = Array.from(filesInput.files).map(f => f.name).slice(0, 3).join(', ');
+				const more = filesInput.files.length > 3 ? ` +${filesInput.files.length - 3} more` : '';
+				filesName.textContent = names + more;
+			} else {
+				filesName.textContent = 'No files selected';
+			}
+		});
+	}
+
 	reportForm.addEventListener('submit', async (e) => {
 		e.preventDefault();
 		const id = document.getElementById('r_bounty_id').value;

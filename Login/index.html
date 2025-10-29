@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEFEND X - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="../shared/auth.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #ffffff;
+            color: #000000;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            background: #ffffff;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Left Section - Login Form */
+        .left-section {
+            width: 40%;
+            background: #ffffff;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(176, 0, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(176, 0, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, #b000ff 0%, #8000ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(176, 0, 255, 0.5);
+            color: #000000;
+        }
+
+        .login-form {
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-header h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            /* subtle animated gradient for the form heading */
+            background: linear-gradient(90deg, #000000 0%, #b000ff 35%, #ff00ea 75%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 8px 30px rgba(176,0,255,0.06), 0 4px 18px rgba(255,0,234,0.04);
+        }
+
+        .form-header p {
+            color: #666666;
+            font-size: 15px;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666666;
+            font-size: 18px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px 14px 48px;
+            background: #f5f5f5;
+            border: 1.5px solid #cccccc;
+            border-radius: 10px;
+            color: #000000;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: #b000ff;
+            box-shadow: 0 0 0 3px rgba(176, 0, 255, 0.15), 0 0 20px rgba(176, 0, 255, 0.3);
+            background: #ffffff;
+        }
+
+        .form-control::placeholder {
+            color: #999999;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666666;
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.3s ease;
+            padding: 4px;
+        }
+
+        .password-toggle:hover {
+            color: #b000ff;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -16px;
+            margin-bottom: 24px;
+        }
+
+        .forgot-password a {
+            color: #b000ff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .forgot-password a:hover {
+            color: #ff00ea;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #b000ff 0%, #8000ff 100%);
+            border: none;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(176, 0, 255, 0.3);
+            margin-bottom: 24px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(176, 0, 255, 0.5);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+    /* Role toggle (Company / CyberSpecialist) */
+        .role-toggle {
+            display: inline-flex;
+            background: #f0f0f0;
+            border: 1px solid #cccccc;
+            border-radius: 999px;
+            padding: 6px;
+            gap: 6px;
+        }
+
+        .role-btn {
+            background: transparent;
+            color: #666666;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background 220ms ease, color 220ms ease, box-shadow 220ms ease, transform 180ms ease;
+        }
+
+        .role-btn:focus {
+            outline: 3px solid rgba(176,0,255,0.3);
+            outline-offset: 2px;
+        }
+
+        /* Active style for Company (purple) */
+        .role-btn.active[data-role="company"] {
+            background: linear-gradient(135deg, #b000ff 0%, #8000ff 100%);
+            color: #ffffff;
+            box-shadow: 0 6px 18px rgba(176,0,255,0.3);
+            transform: translateY(-2px);
+        }
+
+    /* Active style for CyberSpecialist (neon purple) */
+    .role-btn.active[data-role="cyberspecialist"] {
+            background: linear-gradient(135deg, #b000ff 0%, #ff00ea 100%);
+            color: #ffffff; /* better contrast on neon purple */
+            box-shadow: 0 6px 20px rgba(176,0,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Next-step panel shown after selecting role */
+        .next-step {
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #cccccc;
+            padding: 28px;
+            border-radius: 12px;
+            color: #000000;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .next-step .next-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .next-step .next-desc {
+            color: #666666;
+            margin-bottom: 18px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            color: #999999;
+            font-size: 14px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #cccccc;
+        }
+
+        .divider span {
+            padding: 0 16px;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: 1.5px solid #cccccc;
+            border-radius: 10px;
+            color: #000000;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-secondary:hover {
+            border-color: #b000ff;
+            background: rgba(176, 0, 255, 0.1);
+            box-shadow: 0 0 20px rgba(176, 0, 255, 0.2);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .signup-link a {
+            color: #b000ff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            color: #ff00ea;
+        }
+
+        .badge {
+            /* keep the badge detached from layout so it won't overlap inline text */
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #cccccc;
+            border-radius: 50px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            z-index: 60;
+        }
+
+        .badge-avatars {
+            display: flex;
+            margin-right: 8px;
+        }
+
+        .avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            margin-left: -8px;
+        }
+
+        .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .avatar-1 {
+            background: linear-gradient(135deg, #00d9ff, #0099ff);
+        }
+
+        .avatar-2 {
+            background: linear-gradient(135deg, #b000ff, #8000ff);
+        }
+
+        .avatar-3 {
+            background: linear-gradient(135deg, #ff00ea, #b000ff);
+        }
+
+        .badge-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #000000;
+        }
+
+        .badge-highlight {
+            color: #b000ff;
+        }
+
+        /* Right Section - Hero */
+        .right-section {
+            width: 60%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1e 100%);
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .right-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(176, 0, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .hero-content h2 {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(90deg, #ffffff 0%, #b000ff 28%, #ff00ea 68%, #8000ff 100%);
+            background-size: 220% 220%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            /* subtle outline to lift text from background */
+            -webkit-text-stroke: 0.6px rgba(0,0,0,0.35);
+            text-shadow:
+                0 10px 40px rgba(176,0,255,0.08),
+                0 6px 20px rgba(255,0,234,0.06),
+                0 1px 0 rgba(0,0,0,0.15);
+            letter-spacing: -0.6px;
+            animation: gradientShift 6s ease infinite;
+        }
+
+        /* split hero heading into two visual lines when needed */
+        .hero-content h2 .hero-top,
+        .hero-content h2 .hero-bottom {
+            display: block;
+            line-height: 0.95;
+        }
+
+        .hero-content h2 .hero-bottom { margin-top: 8px; }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* responsive heading sizes */
+        @media (max-width: 1024px) {
+            .hero-content h2 { font-size: 48px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h2 { font-size: 34px; }
+        }
+
+        /* Geometric Illustration */
+        .illustration {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 40px 0;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .geometric-shape {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: rotate3d 20s linear infinite;
+        }
+
+        @keyframes rotate3d {
+            0% {
+                transform: rotateY(0deg) rotateX(0deg);
+            }
+            100% {
+                transform: rotateY(360deg) rotateX(360deg);
+            }
+        }
+
+        .hexagon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hex-ring {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 3px solid;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: hexPulse 3s ease-in-out infinite;
+        }
+
+        .hex-ring-1 {
+            border-color: #b000ff;
+            box-shadow: 0 0 20px rgba(176, 0, 255, 0.5), inset 0 0 20px rgba(176, 0, 255, 0.2);
+            animation-delay: 0s;
+        }
+
+        .hex-ring-2 {
+            border-color: #8000ff;
+            box-shadow: 0 0 20px rgba(128, 0, 255, 0.5), inset 0 0 20px rgba(128, 0, 255, 0.2);
+            width: 250px;
+            height: 250px;
+            animation-delay: 1s;
+        }
+
+        .hex-ring-3 {
+            border-color: #ff00ea;
+            box-shadow: 0 0 20px rgba(255, 0, 234, 0.5), inset 0 0 20px rgba(255, 0, 234, 0.2);
+            width: 300px;
+            height: 300px;
+            animation-delay: 2s;
+        }
+
+        @keyframes hexPulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        .central-cube {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            transform-style: preserve-3d;
+            animation: cubeRotate 10s linear infinite;
+        }
+
+        @keyframes cubeRotate {
+            0% {
+                transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotateX(360deg) rotateY(360deg);
+            }
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: rgba(176, 0, 255, 0.1);
+            border: 2px solid #b000ff;
+            box-shadow: 0 0 30px rgba(176, 0, 255, 0.5), inset 0 0 30px rgba(176, 0, 255, 0.2);
+        }
+
+        .cube-face-front {
+            transform: translateZ(60px);
+        }
+
+        .cube-face-back {
+            transform: translateZ(-60px) rotateY(180deg);
+        }
+
+        .cube-face-right {
+            transform: rotateY(90deg) translateZ(60px);
+        }
+
+        .cube-face-left {
+            transform: rotateY(-90deg) translateZ(60px);
+        }
+
+        .cube-face-top {
+            transform: rotateX(90deg) translateZ(60px);
+            background: rgba(255, 0, 234, 0.1);
+            border-color: #ff00ea;
+            box-shadow: 0 0 30px rgba(255, 0, 234, 0.5), inset 0 0 30px rgba(255, 0, 234, 0.2);
+        }
+
+        .cube-face-bottom {
+            transform: rotateX(-90deg) translateZ(60px);
+        }
+
+        .ui-element {
+            position: absolute;
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid rgba(176, 0, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .ui-element-1 {
+            /* place the scanning popup inside the illustration area so it only overlaps the decorative illustration
+               (positioned absolutely relative to .illustration which is already position: relative). */
+            position: absolute;
+            top: var(--scan-top, 8%);
+            right: var(--scan-right, 8%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: fadeInOut 3s ease-in-out infinite;
+            z-index: 40; /* sits above the illustration but below primary content */
+            max-width: 240px;
+            pointer-events: auto;
+            transition: top 120ms linear, right 120ms linear;
+        }
+
+        /* small move handle inside the scanning box (non-intrusive) */
+        .ui-element-1 .drag-handle {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.06);
+            margin-left: 6px;
+            cursor: move;
+            display: inline-block;
+        }
+
+        /* Controls panel (hidden by default, toggled with the gear button) */
+        .scan-controls {
+            position: absolute;
+            left: 12px;
+            bottom: 12px;
+            background: rgba(10,10,15,0.7);
+            border: 1px solid #222431;
+            color: #fff;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            z-index: 70;
+            backdrop-filter: blur(6px);
+            min-width: 220px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+        }
+
+        .scan-controls .row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .scan-controls label {
+            flex: 0 0 48px;
+            color: #b8c6ff;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .scan-controls input[type="range"] { width: 100%; }
+        .scan-controls input[type="number"] {
+            width: 60px;
+            background: transparent;
+            border: 1px solid #2a2a3e;
+            color: #fff;
+            border-radius: 6px;
+            padding: 6px 8px;
+        }
+
+        .scan-controls .controls-row { display:flex; gap:8px; align-items:center; }
+
+        .scan-gear {
+            position: absolute;
+            right: 8px;
+            bottom: 8px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 6px 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #bcdcff;
+            z-index: 71;
+            font-size: 14px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #b000ff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(176, 0, 255, 0.8);
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .status-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #b000ff;
+        }
+
+
+        /* Removed decorative arrow UI element (.ui-element-2 and .arrow-icon) per request */
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .hero-footer {
+            font-size: 15px;
+            color: #8a8a9e;
+            line-height: 1.6;
+            margin-top: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .left-section {
+                padding: 60px 40px;
+            }
+
+            .right-section {
+                padding: 60px 40px;
+            }
+
+            .illustration {
+                width: 300px;
+                height: 300px;
+            }
+
+            /* keep floating badge visible on medium screens */
+            .badge {
+                left: 20px;
+                bottom: 20px;
+            }
+         }
+
+         @media (max-width: 768px) {
+             .container {
+                 flex-direction: column;
+             }
+
+             .left-section,
+             .right-section {
+                 width: 100%;
+             }
+
+             .left-section {
+                 padding: 40px 24px;
+                 min-height: auto;
+             }
+
+             .right-section {
+                 padding: 60px 24px;
+                 min-height: 60vh;
+             }
+
+             /* on small screens keep the badge fixed but closer to the edge to avoid overlapping text */
+             .badge {
+                position: fixed;
+                bottom: 12px;
+                left: 12px;
+                width: fit-content;
+                padding: 8px 12px;
+                z-index: 60;
+            }
+
+             .hero-content h2 {
+                 font-size: 36px;
+             }
+
+             .hero-content .subtitle {
+                 font-size: 16px;
+                 margin-bottom: 40px;
+             }
+
+             .illustration {
+                 width: 250px;
+                 height: 250px;
+             }
+
+            .ui-element-1 {
+                /* keep the scanning popup positioned within the illustration on small screens */
+                top: var(--scan-top, 6%);
+                right: var(--scan-right, 6%);
+            }
+
+            /* .ui-element-2 removed */
+
+             .form-header h1 {
+                 font-size: 28px;
+             }
+         }
+
+        /* Auth Section Styles */
+        #auth-section {
+            font-family: Inter, system-ui, Segoe UI, Arial;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            margin: 0;
+        }
+        #auth-section .card {
+            width: 420px;
+            background: #000000;
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+        #auth-section h1 {
+            margin: 0 0 8px;
+            font-size: 20px;
+        }
+        #auth-section p.sub {
+            color: #b5b5c6;
+            margin: 0 0 18px;
+        }
+        #auth-section .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+        #auth-section .tab {
+            flex: 1;
+            text-align: center;
+            padding: 8px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            background: transparent;
+            color: #b5b5c6;
+            border: 1px solid transparent;
+        }
+        #auth-section .tab.active {
+            background: linear-gradient(135deg, #b000ff, #8000ff);
+            color: #ffffff;
+            box-shadow: 0 6px 18px rgba(176,0,255,0.08);
+        }
+        #auth-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        #auth-section .input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #2a2a3e;
+            background: #0e0f1a;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        #auth-section .btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        #auth-section .btn.primary {
+            background: linear-gradient(135deg, #b000ff, #8000ff);
+            color: #ffffff;
+        }
+        #auth-section .btn.secondary {
+            background: transparent;
+            border: 1px solid #2a2a3e;
+            color: #fff;
+        }
+        #auth-section .muted {
+            color: #b0b0b0;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+        #auth-section .role-badge {
+            display: inline-block;
+            padding: 6px 10px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.02);
+            margin-left: 8px;
+            color: #9fd8ff;
+        }
+        #auth-section .small {
+            font-size: 13px;
+        }
+
+        /* Dashboard Section Styles */
+        #dashboard-section {
+            font-family: Inter, system-ui, Segoe UI, Arial;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            margin: 0;
+        }
+        #dashboard-section .wrap {
+            max-width: 860px;
+            padding: 40px;
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        #dashboard-section h1 {
+            margin: 0 0 8px;
+        }
+        #dashboard-section p {
+            color: #b8b8c8;
+        }
+        #dashboard-section .meta {
+            margin-top: 18px;
+            padding: 16px;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+        #dashboard-section a.btn {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #b000ff, #8000ff);
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section - Login Form -->
+        <div class="left-section">
+            
+            <div class="login-form">
+                <div class="form-header">
+                    <h1>Welcome to DEFEND X</h1>
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="roleInput">Continue as</label>
+                        <div class="input-wrapper" style="margin-top:12px;">
+                            <div class="role-toggle" role="tablist" aria-label="Select role">
+                                <button type="button" class="role-btn active" data-role="company" role="tab" aria-selected="true">Company</button>
+                                <button type="button" class="role-btn" data-role="cyberspecialist" role="tab" aria-selected="false">CyberSpecialist</button>
+                            </div>
+                            <input type="hidden" name="role" id="roleInput" value="company">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Continue</button>
+                </form>
+
+                <div class="signup-link">
+                    Learn more about DEFEND X <a href="#" id="signupLink">here</a>
+                </div>
+
+                <!-- Next step panel (hidden until a role is chosen and user continues) -->
+                <div id="nextStep" class="next-step" hidden>
+                    <div class="next-title">Next step</div>
+                    <div class="next-desc">Preparing your experience...</div>
+                    <div style="margin-top:18px; display:flex; gap:10px;">
+                        <button id="backBtn" class="btn-secondary">Back</button>
+                        <button id="finishBtn" class="btn-primary">Get started</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="badge">
+                <div class="badge-avatars">
+                    <div class="avatar avatar-1"></div>
+                    <div class="avatar avatar-2"></div>
+                    <div class="avatar avatar-3"></div>
+                </div>
+                <span class="badge-text">Join <span class="badge-highlight">50k+</span> CyberSpecialists!</span>
+            </div>
+        </div>
+
+        <!-- Right Section - Hero -->
+        <div class="right-section">
+            <div class="hero-content">
+                <h2><span class="hero-bottom">DEFEND X</span></h2>
+                <p class="hero-footer" style="margin-top:12px;">Start your journey in ethical hacking. Report bugs, earn bounties, and make the internet safer.</p>
+
+                <div class="illustration">
+                    <div class="geometric-shape">
+                        <div class="hexagon">
+                            <div class="hex-ring hex-ring-1"></div>
+                            <div class="hex-ring hex-ring-2"></div>
+                            <div class="hex-ring hex-ring-3"></div>
+                        </div>
+                        <div class="central-cube">
+                            <div class="cube-face cube-face-front"></div>
+                            <div class="cube-face cube-face-back"></div>
+                            <div class="cube-face cube-face-right"></div>
+                            <div class="cube-face cube-face-left"></div>
+                            <div class="cube-face cube-face-top"></div>
+                            <div class="cube-face cube-face-bottom"></div>
+                        </div>
+                    </div>
+                    <!-- scanning popup moved inside the illustration so it sits over the decorative area only -->
+                    <div class="ui-element ui-element-1" role="status" aria-label="Scanning Active">
+                        <div class="status-dot" aria-hidden="true"></div>
+                        <span class="status-text">Scanning Active</span>
+                        <span class="drag-handle" title="Drag to move" aria-hidden="true"></span>
+                    </div>
+
+                    <!-- gear button toggles the small position controls (for designers/admins) -->
+                    <button type="button" class="scan-gear" aria-expanded="false" title="Position scanning box">⚙</button>
+
+                    <div class="scan-controls" id="scanControls" hidden aria-hidden="true">
+                        <div class="row controls-row">
+                            <label for="scanTop">Top</label>
+                            <input id="scanTop" type="range" min="0" max="80" step="1" value="8">
+                            <input id="scanTopNum" type="number" min="0" max="80" step="1" value="8">
+                        </div>
+                        <div class="row controls-row">
+                            <label for="scanRight">Right</label>
+                            <input id="scanRight" type="range" min="0" max="80" step="1" value="8">
+                            <input id="scanRightNum" type="number" min="0" max="80" step="1" value="8">
+                        </div>
+                        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:6px;">
+                            <button id="scanReset" type="button" class="btn-secondary">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Embedded Auth Section -->
+    <div id="auth-section" style="display:none;">
+        <div class="card" id="card">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <div>
+                    <h1 id="title">Authenticate</h1>
+                    <p class="sub" id="subtitle">Login or Register to continue on DEFEND X</p>
+                </div>
+                <div class="role-badge" id="roleBadge">Role</div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-mode="login" id="tabLogin">Login</div>
+                <div class="tab" data-mode="register" id="tabRegister">Register</div>
+            </div>
+
+            <div id="loginView">
+                <label for="loginUsername">Username</label>
+                <input id="loginUsername" class="input" placeholder="username">
+                <label for="loginPassword">Password</label>
+                <input id="loginPassword" class="input" type="password" placeholder="password">
+                <button id="loginBtn" class="btn primary">Login</button>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+                    <div class="muted small">If you don't have an account, switch to Register.</div>
+                    <a href="#" id="forgotLink" class="muted small">Forgot password?</a>
+                </div>
+            </div>
+
+            <div id="registerView" style="display:none">
+                <label for="regUsername">Username</label>
+                <input id="regUsername" class="input" placeholder="choose a username">
+                <label for="regEmail">Email</label>
+                <input id="regEmail" class="input" placeholder="you@company.com" type="email">
+                <label for="regPassword">Password</label>
+                <input id="regPassword" class="input" type="password" placeholder="password">
+                <label for="regPassword2">Re-enter Password</label>
+                <input id="regPassword2" class="input" type="password" placeholder="re-enter password">
+                <button id="registerBtn" class="btn primary">Register</button>
+                <div class="muted small">We store your details locally for this demo (no server). Passwords are stored in localStorage only for this prototype.</div>
+            </div>
+
+            <!-- Reset / Forgot password flow -->
+            <div id="resetView" style="display:none">
+                <label for="resetUser">Username or Email</label>
+                <input id="resetUser" class="input" placeholder="username or email">
+                <button id="resetVerifyBtn" class="btn secondary">Verify</button>
+
+                <div id="resetStep2" style="display:none;margin-top:10px">
+                    <label for="resetPass1">New Password</label>
+                    <input id="resetPass1" class="input" type="password" placeholder="new password">
+                    <label for="resetPass2">Re-enter Password</label>
+                    <input id="resetPass2" class="input" type="password" placeholder="re-enter password">
+                    <button id="resetSetBtn" class="btn primary">Set New Password</button>
+                    <div class="muted small">We update your password locally for this demo.</div>
+                </div>
+
+                <div style="margin-top:12px;display:flex;gap:8px;">
+                    <button id="resetBackBtn" class="btn secondary">Back to Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Embedded Dashboard Section -->
+    <div id="dashboard-section" style="display:none;">
+        <div class="wrap" id="wrap">
+            <h1 id="greeting">Welcome</h1>
+            <p id="roleLine">You're now in DEFEND X</p>
+            <div class="meta" id="meta"></div>
+            <a class="btn" id="goHome">Go to home</a>
+        </div>
+    </div>
+
+    <script>
+        // Role toggle behavior and next-step flow
+        (function() {
+            const loginForm = document.getElementById('loginForm');
+            const roleInput = document.getElementById('roleInput');
+            const roleBtns = document.querySelectorAll('.role-btn');
+            const nextStep = document.getElementById('nextStep');
+            const backBtn = document.getElementById('backBtn');
+            const finishBtn = document.getElementById('finishBtn');
+            let currentRole = roleInput ? roleInput.value : 'company';
+
+            roleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    roleBtns.forEach(b => b.classList.remove('active'));
+                    roleBtns.forEach(b => b.setAttribute('aria-selected', 'false'));
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-selected', 'true');
+                    currentRole = btn.dataset.role;
+                    if (roleInput) roleInput.value = currentRole;
+                });
+            });
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (!currentRole) {
+                    alert('Please select Company or CyberSpecialist to continue.');
+                    return;
+                }
+
+                // Show auth section with blurred background
+                document.querySelector('.container').style.filter = 'blur(5px)';
+                document.getElementById('auth-section').style.display = 'flex';
+                // Pass role to auth section
+                window.currentRole = currentRole;
+                initAuth();
+            });
+
+            if (backBtn) {
+                backBtn.addEventListener('click', function() {
+                    nextStep.hidden = true;
+                    document.querySelector('.login-form').hidden = false;
+                });
+            }
+
+                if (finishBtn) {
+                finishBtn.addEventListener('click', function() {
+                    alert('Welcome to DEFEND X — continuing as ' + (currentRole === 'company' ? 'Company' : 'CyberSpecialist') + '.');
+                });
+            }
+
+            // Learn more link
+            const signupLink = document.getElementById('signupLink');
+            if (signupLink) {
+                signupLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Learn more about DEFEND X — coming soon.');
+                });
+            }
+        })();
+    </script>
+
+    <script>
+        // Auth script (from auth.html)
+        function initAuth() {
+            const role = window.currentRole || 'company';
+            // show a nicer label for the role
+            document.getElementById('roleBadge').textContent = role === 'company' ? 'Company' : (role === 'cyberspecialist' ? 'CyberSpecialist' : role);
+            document.getElementById('title').textContent = role === 'company' ? 'Company Access' : 'CyberSpecialist Access';
+            document.getElementById('subtitle').textContent = role === 'company' ? 'Company representatives login or register' : 'CyberSpecialists login or register';
+
+            // Tabs
+            const tabLogin = document.getElementById('tabLogin');
+            const tabRegister = document.getElementById('tabRegister');
+            const loginView = document.getElementById('loginView');
+            const registerView = document.getElementById('registerView');
+
+            function showMode(mode){
+                if(mode === 'login'){
+                    tabLogin.classList.add('active');
+                    tabRegister.classList.remove('active');
+                    loginView.style.display = '';
+                    registerView.style.display = 'none';
+                } else {
+                    tabLogin.classList.remove('active');
+                    tabRegister.classList.add('active');
+                    loginView.style.display = 'none';
+                    registerView.style.display = '';
+                }
+            }
+
+            tabLogin.addEventListener('click', ()=> showMode('login'));
+            tabRegister.addEventListener('click', ()=> showMode('register'));
+
+            // Storage helpers (simple, for demo only)
+            function usersKey(role){ return 'defendx_users_' + role; }
+            function loadUsers(role){ try{ return JSON.parse(localStorage.getItem(usersKey(role))||'[]'); }catch(e){ return []; } }
+            function saveUsers(role, users){ localStorage.setItem(usersKey(role), JSON.stringify(users)); }
+
+            // Register flow
+            document.getElementById('registerBtn').addEventListener('click', async ()=>{
+                const u = document.getElementById('regUsername').value.trim();
+                const e = document.getElementById('regEmail').value.trim().toLowerCase();
+                const p = document.getElementById('regPassword').value;
+                const p2 = document.getElementById('regPassword2').value;
+                if(!u || !e || !p || !p2){ alert('Please fill all fields'); return; }
+                if(p !== p2){ alert('Passwords do not match'); return; }
+                if(!e.endsWith('@gmail.com')){ alert('Please use a valid Gmail account.'); return; }
+                // Validate email with ZeroBounce API
+                const apiKey = '1911ad6c1da04b36837c0602151d5bf9';
+                try {
+                    const response = await fetch(`https://api.zerobounce.net/v2/validate?api_key=${apiKey}&email=${encodeURIComponent(e)}`);
+                    const data = await response.json();
+                    if(data.status !== 'valid'){
+                        alert('Invalid Gmail account. Please check your email.');
+                        return;
+                    }
+                } catch (error) {
+                    alert('Error validating email. Please try again.');
+                    return;
+                }
+                const users = loadUsers(role);
+                if(users.find(x=> x.username.toLowerCase()===u.toLowerCase() || x.email===e)){
+                    alert('An account with this username or email already exists for this role');
+                    return;
+                }
+                users.push({username:u, email:e, password:p, created:Date.now()});
+                saveUsers(role, users);
+                alert('Registration successful. You can now login.');
+                showMode('login');
+                document.getElementById('loginUsername').value = u;
+            });
+
+            // Login flow
+            document.getElementById('loginBtn').addEventListener('click', ()=>{
+                const u = document.getElementById('loginUsername').value.trim();
+                const p = document.getElementById('loginPassword').value;
+                if(!u || !p){ alert('Please enter username and password'); return; }
+                const users = loadUsers(role);
+                const found = users.find(x=> x.username.toLowerCase()===u.toLowerCase() && x.password===p);
+                if(!found){ alert('Invalid credentials. If you are new, please register.'); return; }
+                // on success show dashboard with blurred background
+                document.querySelector('.container').style.filter = 'blur(5px)';
+                document.getElementById('auth-section').style.display = 'none';
+                document.getElementById('dashboard-section').style.display = 'flex';
+                window.currentUser = found.username;
+                initDashboard();
+            });
+
+            // Forgot password / reset flow
+            const forgotLink = document.getElementById('forgotLink');
+            const resetView = document.getElementById('resetView');
+            const resetUser = document.getElementById('resetUser');
+            const resetVerifyBtn = document.getElementById('resetVerifyBtn');
+            const resetStep2 = document.getElementById('resetStep2');
+            const resetPass1 = document.getElementById('resetPass1');
+            const resetPass2 = document.getElementById('resetPass2');
+            const resetSetBtn = document.getElementById('resetSetBtn');
+            const resetBackBtn = document.getElementById('resetBackBtn');
+            let resetIndex = -1;
+
+            function showReset(){
+                loginView.style.display = 'none';
+                registerView.style.display = 'none';
+                resetView.style.display = '';
+                resetStep2.style.display = 'none';
+                resetUser.value = '';
+                resetPass1.value = '';
+                resetPass2.value = '';
+                tabLogin.classList.remove('active');
+                tabRegister.classList.remove('active');
+            }
+
+            function backToLogin(){
+                resetView.style.display = 'none';
+                showMode('login');
+            }
+
+            forgotLink.addEventListener('click', function(e){ e.preventDefault(); showReset(); });
+
+            function findUserIndexByIdentifier(role, ident){
+                const users = loadUsers(role);
+                const id = ident.trim().toLowerCase();
+                return users.findIndex(u => u.username.toLowerCase() === id || (u.email && u.email.toLowerCase() === id));
+            }
+
+            resetVerifyBtn.addEventListener('click', function(){
+                const val = resetUser.value.trim();
+                if(!val){ alert('Enter your username or email to verify'); return; }
+                const idx = findUserIndexByIdentifier(role, val);
+                if(idx === -1){ alert('No account found with that username or email for this role'); return; }
+                resetIndex = idx;
+                resetStep2.style.display = '';
+                resetPass1.focus();
+            });
+
+            resetSetBtn.addEventListener('click', function(){
+                const p1 = resetPass1.value;
+                const p2 = resetPass2.value;
+                if(!p1 || !p2){ alert('Please enter and confirm your new password'); return; }
+                if(p1 !== p2){ alert('Passwords do not match'); return; }
+                const users = loadUsers(role);
+                if(resetIndex < 0 || resetIndex >= users.length){ alert('Unexpected error — user not found'); return; }
+                users[resetIndex].password = p1;
+                saveUsers(role, users);
+                alert('Password updated. You can now login with your new password.');
+                backToLogin();
+                document.getElementById('loginUsername').value = users[resetIndex].username;
+            });
+
+            resetBackBtn.addEventListener('click', function(){ backToLogin(); });
+        }
+    </script>
+
+    <script>
+        // Dashboard script (from dashboard.html)
+        function initDashboard() {
+            const role = window.currentRole || 'company';
+            const user = window.currentUser || '';
+            document.getElementById('greeting').textContent = 'Welcome, ' + (user||'User') + '!';
+            document.getElementById('roleLine').textContent = 'Logged in as ' + role.charAt(0).toUpperCase()+role.slice(1);
+            const meta = document.getElementById('meta');
+            meta.innerHTML = '<strong>Account:</strong> ' + (user||'—') + '<br><strong>Role:</strong> ' + role + '<br><strong>Timestamp:</strong> ' + new Date().toLocaleString();
+            document.getElementById('goHome').addEventListener('click', ()=>{
+                document.getElementById('dashboard-section').style.display = 'none';
+                document.querySelector('.container').style.filter = 'none';
+            });
+        }
+    </script>
+    <script>
+    // Scanning popup position customization: sliders + drag handle + localStorage persistence
+    (function(){
+        const STORAGE_KEY = 'defendx_scan_pos';
+        const el = document.querySelector('.ui-element-1');
+        const ill = document.querySelector('.illustration');
+        if(!el || !ill) return;
+
+        const gear = document.querySelector('.scan-gear');
+        const controls = document.getElementById('scanControls');
+        const topR = document.getElementById('scanTop');
+        const topN = document.getElementById('scanTopNum');
+        const rightR = document.getElementById('scanRight');
+        const rightN = document.getElementById('scanRightNum');
+        const resetBtn = document.getElementById('scanReset');
+
+        function extractPercent(val){
+            if(!val) return null;
+            if(typeof val === 'string' && val.endsWith('%')) return parseFloat(val);
+            if(typeof val === 'string' && val.endsWith('px')){
+                const px = parseFloat(val);
+                const h = ill.clientHeight;
+                if(h) return (px / h) * 100;
+            }
+            return null;
+        }
+
+        function applyFromStorage(){
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if(!raw) return;
+            try{
+                const obj = JSON.parse(raw);
+                if(typeof obj.top === 'number'){ el.style.setProperty('--scan-top', obj.top + '%'); if(topR) topR.value = Math.round(obj.top); if(topN) topN.value = Math.round(obj.top); }
+                if(typeof obj.right === 'number'){ el.style.setProperty('--scan-right', obj.right + '%'); if(rightR) rightR.value = Math.round(obj.right); if(rightN) rightN.value = Math.round(obj.right); }
+            }catch(e){ /* ignore */ }
+        }
+
+        function saveCurrent(){
+            const computed = getComputedStyle(el);
+            const t = extractPercent(computed.top) || Number(topR.value);
+            const r = extractPercent(computed.right) || Number(rightR.value);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ top: Math.round(t), right: Math.round(r) }));
+        }
+
+        // wire controls
+        function onRangeChange(){
+            const t = Number(topR.value);
+            const r = Number(rightR.value);
+            if(topN) topN.value = t;
+            if(rightN) rightN.value = r;
+            el.style.setProperty('--scan-top', t + '%');
+            el.style.setProperty('--scan-right', r + '%');
+            saveCurrent();
+        }
+        function onNumChange(){
+            const t = Number(topN.value);
+            const r = Number(rightN.value);
+            if(topR) topR.value = t;
+            if(rightR) rightR.value = r;
+            el.style.setProperty('--scan-top', t + '%');
+            el.style.setProperty('--scan-right', r + '%');
+            saveCurrent();
+        }
+
+        if(topR) topR.addEventListener('input', onRangeChange);
+        if(rightR) rightR.addEventListener('input', onRangeChange);
+        if(topN) topN.addEventListener('change', onNumChange);
+        if(rightN) rightN.addEventListener('change', onNumChange);
+
+        if(resetBtn) resetBtn.addEventListener('click', function(){
+            localStorage.removeItem(STORAGE_KEY);
+            el.style.removeProperty('--scan-top');
+            el.style.removeProperty('--scan-right');
+            if(topR) topR.value = 8; if(topN) topN.value = 8; if(rightR) rightR.value = 8; if(rightN) rightN.value = 8;
+        });
+
+        if(gear && controls){
+            gear.addEventListener('click', function(){
+                const open = controls.hasAttribute('hidden');
+                if(open){ controls.removeAttribute('hidden'); controls.setAttribute('aria-hidden', 'false'); gear.setAttribute('aria-expanded','true'); }
+                else { controls.setAttribute('hidden',''); controls.setAttribute('aria-hidden', 'true'); gear.setAttribute('aria-expanded','false'); }
+            });
+        }
+
+        // drag support on the small handle
+        const handle = el.querySelector('.drag-handle');
+        if(handle){
+            let dragging = false;
+            let rect = null;
+            function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+            handle.addEventListener('pointerdown', function(e){
+                dragging = true;
+                rect = ill.getBoundingClientRect();
+                handle.setPointerCapture(e.pointerId);
+                e.preventDefault();
+            });
+            document.addEventListener('pointermove', function(e){
+                if(!dragging) return;
+                const x = e.clientX;
+                const y = e.clientY;
+                const topPct = clamp(((y - rect.top) / rect.height) * 100, 0, 90);
+                const rightPct = clamp(((rect.right - x) / rect.width) * 100, 0, 90);
+                el.style.setProperty('--scan-top', topPct.toFixed(1) + '%');
+                el.style.setProperty('--scan-right', rightPct.toFixed(1) + '%');
+                if(topR) topR.value = Math.round(topPct); if(topN) topN.value = Math.round(topPct);
+                if(rightR) rightR.value = Math.round(rightPct); if(rightN) rightN.value = Math.round(rightPct);
+            });
+            document.addEventListener('pointerup', function(e){
+                if(!dragging) return;
+                dragging = false;
+                try{ handle.releasePointerCapture && handle.releasePointerCapture(e.pointerId); }catch(e){}
+                saveCurrent();
+            });
+        }
+
+        // init
+        applyFromStorage();
+    })();
+    </script>
+</body>
+</html>

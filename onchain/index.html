@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Defend X — On-chain Proofs</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../shared/styles.css" />
+	<script src="../shared/auth.js"></script>
+	<style>
+		body.onchain {
+			background-color: #090c12;
+			background-image:
+				radial-gradient(1200px 800px at 50% -10%, rgba(124,92,255,0.12), transparent 60%),
+				linear-gradient(180deg, #090c12 0%, #0b0f14 100%);
+		}
+		.grid-2 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+		.section { grid-column: span 6; }
+		.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 12px; color: var(--muted); }
+	</style>
+</head>
+<body class="onchain">
+	<nav class="nav">
+		<div class="nav-inner container">
+			<div class="brand"><div class="brand-badge"></div> Defend X</div>
+			<div class="nav-links">
+				<a class="nav-link" href="../metamask/index.html">Home</a>
+				<a class="nav-link" href="../leaderboard/index.html">Leaderboard</a>
+				<a class="nav-link" href="../upload-bounty/index.html" data-hide-specialist>Upload Bounty</a>
+				<a class="nav-link" href="../bounties/index.html" data-hide-company>Bounties</a>
+				<a class="nav-link" href="../wallet/index.html">Wallet</a>
+				<a class="nav-link" href="../profile/index.html">Profile</a>
+				<a class="btn" href="../hunt/index.html" data-hide-company>Start Hunting</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="hero" style="padding-bottom: 0;">
+			<h1>On‑chain Proofs</h1>
+			<p style="color:var(--muted);">Public transaction hashes and signatures from researchers and companies.</p>
+		</div>
+
+		<div class="grid-2">
+			<div class="card section">
+				<h3 style="margin:0 0 8px;">Recent Payout Transactions</h3>
+				<table class="table">
+					<thead><tr><th>Program</th><th>Tx Hash</th><th>Amount</th></tr></thead>
+					<tbody>
+						<tr><td>NovaBank</td><td class="mono">0x4fb…9a1b</td><td>$3,500 USDC</td></tr>
+						<tr><td>Orion Cloud</td><td class="mono">0xa9c…2f77</td><td>0.25 ETH</td></tr>
+						<tr><td>Acme Corp</td><td class="mono">0x71e…6c05</td><td>$1,500 USDC</td></tr>
+					</tbody>
+				</table>
+				<p style="color:var(--muted); font-size:12px; margin:8px 0 0;">Note: Demo hashes. Replace with explorer links when integrating backend.</p>
+			</div>
+
+			<div class="card section">
+				<h3 style="margin:0 0 8px;">Signed Acknowledgements</h3>
+				<table class="table">
+					<thead><tr><th>Entity</th><th>Message</th><th>Signature</th></tr></thead>
+					<tbody>
+						<tr><td>HexGuard</td><td class="mono">"Received payout for IDOR report"</td><td class="mono">0x2ab…ff9d</td></tr>
+						<tr><td>Specter</td><td class="mono">"Confirmed remediation PR #142"</td><td class="mono">0x6c3…ae02</td></tr>
+						<tr><td>NovaBank</td><td class="mono">"Verified triage and accepted severity"</td><td class="mono">0xd91…70c1</td></tr>
+					</tbody>
+				</table>
+				<p style="color:var(--muted); font-size:12px; margin:8px 0 0;">Note: Demo signatures. Replace with real EIP-191 signatures.</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">© <span id="year"></span> Defend X</div>
+	<script src="../shared/storage.js"></script>
+	<script>document.addEventListener('DOMContentLoaded',()=>{document.getElementById('year').textContent=String(new Date().getFullYear());});</script>
+</body>
+</html>

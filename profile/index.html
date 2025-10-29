@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Defend X — Profile</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../shared/styles.css" />
+	<script src="../shared/auth.js"></script>
+	<style>
+		.profile {
+			display: grid;
+			grid-template-columns: 320px 1fr;
+			gap: 20px;
+		}
+		.avatar {
+			width: 160px; height: 160px; border-radius: 50%;
+			border: 2px solid var(--border);
+			background: rgba(255,255,255,0.06) center/cover no-repeat;
+		}
+	</style>
+</head>
+<body>
+	<nav class="nav">
+		<div class="nav-inner container">
+			<div class="brand"><div class="brand-badge"></div> Defend X</div>
+			<div class="nav-links">
+				<a class="nav-link" href="../metamask/index.html">Home</a>
+				<a class="nav-link" href="../leaderboard/index.html">Leaderboard</a>
+				<a class="nav-link" href="../upload-bounty/index.html" data-hide-specialist>Upload Bounty</a>
+				<a class="nav-link" href="../bounties/index.html" data-hide-company>Bounties</a>
+				<a class="nav-link" href="../wallet/index.html">Wallet</a>
+				<a class="nav-link" href="../profile/index.html">Profile</a>
+				<a class="btn" href="../hunt/index.html" data-hide-company>Start Hunting</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="hero" style="padding-bottom: 0;">
+			<h1>Your Profile</h1>
+			<p style="color:var(--muted);">Update your username, change password, set your avatar, or log out.</p>
+		</div>
+
+		<div class="profile">
+			<div class="card">
+				<h3 style="margin:0 0 12px;">Avatar</h3>
+				<div id="avatar" class="avatar"></div>
+				<div style="height:10px"></div>
+				<div class="file-input" style="width:100%;">
+					<div class="chip" id="avatarName">Choose image…</div>
+					<div class="trigger">Select</div>
+					<input type="file" id="avatarInput" accept="image/*" />
+				</div>
+				<div style="height:10px"></div>
+				<button class="btn" id="saveAvatar">Save Avatar</button>
+			</div>
+
+			<div class="card">
+				<h3 style="margin:0 0 12px;">Account</h3>
+				<form id="usernameForm">
+					<label>
+						<div>Username</div>
+						<input class="input" type="text" id="username" required />
+					</label>
+					<div style="height:10px"></div>
+					<button class="btn" type="submit">Update Username</button>
+				</form>
+				<div style="height:16px"></div>
+				<form id="passwordForm">
+					<label>
+						<div>Current Password</div>
+						<div style="display:flex; gap:8px; align-items:center;">
+							<input class="input" type="password" id="currentPassword" />
+							<button type="button" class="btn secondary" id="toggleCurrentPw" aria-label="Toggle password visibility">👁</button>
+						</div>
+					</label>
+					<div style="height:8px"></div>
+					<label>
+						<div>New Password</div>
+						<input class="input" type="password" id="newPassword" required />
+					</label>
+					<div style="height:8px"></div>
+					<label>
+						<div>Confirm New Password</div>
+						<input class="input" type="password" id="confirmPassword" required />
+					</label>
+					<div style="height:10px"></div>
+					<button class="btn" type="submit">Change Password</button>
+				</form>
+				<div style="height:16px"></div>
+				<button class="btn secondary" id="logout">Logout</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">© <span id="year"></span> Defend X</div>
+
+	<script src="../shared/storage.js"></script>
+	<script src="./script.js"></script>
+</body>
+</html>
