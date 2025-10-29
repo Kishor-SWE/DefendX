@@ -2,11 +2,51 @@ document.addEventListener('DOMContentLoaded', () => {
 	const yearEl = document.getElementById('year');
 	if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
+	// Remove any stray media or overlays stuck at top-left (e.g., injected image/grid)
+	const WHITELIST = new Set(['NAV', 'CANVAS']);
+	function looksTopLeft(el) {
+		try {
+			const rect = el.getBoundingClientRect();
+			return rect.left < 60 && rect.top < 160 && rect.width > 20 && rect.height > 20;
+		} catch { return false; }
+	}
+	function hasBackgroundImage(el) {
+		const cs = window.getComputedStyle(el);
+		return cs && cs.backgroundImage && cs.backgroundImage !== 'none';
+	}
+	function containsImages(el) {
+		return el.querySelector && el.querySelector('img, picture, video');
+	}
+	function isWhitelisted(el) {
+		return WHITELIST.has(el.tagName) || el.id === 'scene' || el.closest && el.closest('nav');
+	}
+	function nukeTopLeftArtifacts() {
+		const all = Array.from(document.querySelectorAll('body *'));
+		all.forEach(el => {
+			if (isWhitelisted(el)) return;
+			if (!looksTopLeft(el)) return;
+			if (el.tagName === 'IMG' || el.tagName === 'VIDEO' || hasBackgroundImage(el) || containsImages(el)) {
+				// Prefer hiding to reduce layout shifts
+				el.style.setProperty('display', 'none', 'important');
+			}
+		});
+	}
+	// Initial and repeated attempts for a short time
+	nukeTopLeftArtifacts();
+	let attempts = 0;
+	const interval = setInterval(() => {
+		attempts += 1;
+		nukeTopLeftArtifacts();
+		if (attempts > 30) clearInterval(interval); // ~3s at 100ms
+	}, 100);
+	const mo = new MutationObserver(() => nukeTopLeftArtifacts());
+	mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
+
 	const canvas = document.getElementById('scene');
 	const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 	const scene = new THREE.Scene();
 	const camera = new THREE.PerspectiveCamera(55, 2, 0.1, 100);
-	camera.position.set(0, 0, 5.5);
+	camera.position.set(0, 0, 6.4);
 
 	const resize = () => {
 		const width = canvas.clientWidth || canvas.parentElement.clientWidth;
@@ -36,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		emissiveIntensity: 0.45
 	});
 	const mesh = new THREE.Mesh(geo, mat);
+	mesh.position.set(5.4, -2.4, 0); // further right and doubled downward offset
 	scene.add(mesh);
 
 	const wire = new THREE.WireframeGeometry(geo);
@@ -44,11 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Particles
 	const pGeo = new THREE.BufferGeometry();
-	const count = 600;
+	const count = 700;
 	const positions = new Float32Array(count * 3);
 	for (let i = 0; i < count * 3; i += 3) {
-		positions[i] = (Math.random() - 0.5) * 12;
-		positions[i + 1] = (Math.random() - 0.5) * 12;
+		positions[i] = (Math.random() - 0.5) * 14;
+		positions[i + 1] = (Math.random() - 0.5) * 10 + 0.6; // distribute around new globe position
 		positions[i + 2] = (Math.random() - 0.5) * 12;
 	}
 	pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -61,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	gsap.to(mesh.rotation, { x: Math.PI * 2, duration: 22, repeat: -1, ease: 'none' });
 	gsap.to(points.rotation, { y: -Math.PI * 2, duration: 60, repeat: -1, ease: 'none' });
 
-	// Float cards animation
+	// Float cards animation and positions
 	const fc1 = document.getElementById('fc1');
 	const fc2 = document.getElementById('fc2');
 	const fc3 = document.getElementById('fc3');
