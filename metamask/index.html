@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Defend X — Home</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../shared/styles.css" />
+	<style>
+		.scene-wrap { position: relative; height: 70vh; border-bottom: 1px solid var(--border); }
+		#scene { position:absolute; inset:0; }
+		.scene-overlay { position: absolute; inset: 0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+		.glow {
+			position: absolute; width: 600px; height: 600px; border-radius: 50%;
+			background: radial-gradient(closest-side, rgba(124,92,255,0.35), transparent);
+			filter: blur(40px); mix-blend-mode: screen; left: -100px; top: -160px;
+		}
+		.float-cards { position: relative; margin-top: -80px; }
+		.float-card { position:absolute; padding:16px 18px; border-radius:14px; background: rgba(255,255,255,0.06); border:1px solid var(--border); box-shadow: var(--shadow); }
+		.float-card.small { font-size: 12px; color: var(--muted); }
+	</style>
+</head>
+<body>
+	<nav class="nav">
+		<div class="nav-inner container">
+			<div class="brand"><div class="brand-badge"></div> Defend X</div>
+			<div class="nav-links">
+				<a class="nav-link" href="../metamask/index.html">Home</a>
+				<a class="nav-link" href="../leaderboard/index.html">Leaderboard</a>
+				<a class="nav-link" href="../upload-bounty/index.html">Upload Bounty</a>
+				<a class="nav-link" href="../bounties/index.html">Bounties</a>
+				<a class="nav-link" href="../wallet/index.html">Wallet</a>
+				<a class="btn" href="../bounties/index.html">Start Hunting</a>
+			</div>
+		</div>
+	</nav>
+
+	<section class="scene-wrap">
+		<canvas id="scene"></canvas>
+		<div class="scene-overlay">
+			<div class="hero">
+				<h1 style="margin:0 0 10px;">Secure the future of the open web</h1>
+				<p style="color:var(--muted); max-width:720px; margin:0 auto">A Metamask-inspired experience in a darker, neon-infused aesthetic. Smooth motion, lightweight 3D, and playful accents — reimagined for Defend X.</p>
+			</div>
+		</div>
+		<div class="glow"></div>
+	</section>
+
+	<div class="container float-cards">
+		<div class="float-card" id="fc1">Realtime payouts</div>
+		<div class="float-card small" id="fc2">Multi-chain wallet support</div>
+		<div class="float-card" id="fc3">On-chain proofs</div>
+	</div>
+
+	<div class="container" style="margin-top:120px;">
+		<div class="grid">
+			<div class="card" style="grid-column: span 6;">
+				<h2 style="margin:0 0 8px;">Why Defend X</h2>
+				<p style="color:var(--muted);">Built for speed, clarity, and delight. We take cues from the best product experiences on the web and apply them to security workflows.</p>
+			</div>
+			<div class="card" style="grid-column: span 6;">
+				<h2 style="margin:0 0 8px;">Designed for trust</h2>
+				<p style="color:var(--muted);">Clear incentives, transparent ranking, and programmatic payouts.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">© <span id="year"></span> Defend X</div>
+
+	<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+	<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+	<script src="../shared/storage.js"></script>
+	<script src="./script.js"></script>
+</body>
+</html>

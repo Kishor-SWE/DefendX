@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Defend X — Bounties</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../shared/styles.css" />
+	<style>
+		.bounty {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			gap: 12px;
+			align-items: center;
+			border: 1px solid var(--border);
+			border-radius: 14px;
+			padding: 14px;
+			background: rgba(255,255,255,0.03);
+		}
+		.bounty + .bounty { margin-top: 12px; }
+		.modal {
+			position: fixed; inset:0; display:none; align-items:center; justify-content:center;
+			background: rgba(0,0,0,1);
+		}
+		.modal .panel { width: 680px; max-width: 92vw; }
+	</style>
+</head>
+<body>
+	<nav class="nav">
+		<div class="nav-inner container">
+			<div class="brand"><div class="brand-badge"></div> Defend X</div>
+			<div class="nav-links">
+				<a class="nav-link" href="../metamask/index.html">Home</a>
+				<a class="nav-link" href="../leaderboard/index.html">Leaderboard</a>
+				<a class="nav-link" href="../upload-bounty/index.html">Upload Bounty</a>
+				<a class="nav-link" href="../bounties/index.html">Bounties</a>
+				<a class="nav-link" href="../wallet/index.html">Wallet</a>
+				<a class="btn" href="../bounties/index.html">Start Hunting</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="hero" style="padding-bottom: 12px;">
+			<h1>Bounties</h1>
+			<p style="color:var(--muted);">Pick a target, accept the challenge, and submit your report.</p>
+		</div>
+		<div id="list"></div>
+	</div>
+
+	<div class="modal" id="reportModal">
+		<div class="card panel">
+			<h2 style="margin:0 0 12px;">Submit Report</h2>
+			<form id="reportForm">
+				<input type="hidden" id="r_bounty_id" />
+				<label>
+					<div>Bug Type</div>
+					<input class="input" type="text" id="r_type" placeholder="e.g., XSS, IDOR, SQLi" required />
+				</label>
+				<div style="height:8px"></div>
+				<label>
+					<div>Detailed Report</div>
+					<textarea class="input" id="r_details" rows="6" placeholder="Steps to reproduce, impact, remediation..." required></textarea>
+				</label>
+				<div style="height:12px"></div>
+				<div style="display:flex; gap:8px; justify-content:flex-end;">
+					<button type="button" class="btn secondary" id="closeModal">Cancel</button>
+					<button type="submit" class="btn">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="footer">© <span id="year"></span> Defend X</div>
+
+	<script src="../shared/storage.js"></script>
+	<script src="./script.js"></script>
+</body>
+</html>

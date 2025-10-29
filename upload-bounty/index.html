@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Defend X — Upload Bounty</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../shared/styles.css" />
+</head>
+<body>
+	<nav class="nav">
+		<div class="nav-inner container">
+			<div class="brand"><div class="brand-badge"></div> Defend X</div>
+			<div class="nav-links">
+				<a class="nav-link" href="../metamask/index.html">Home</a>
+				<a class="nav-link" href="../leaderboard/index.html">Leaderboard</a>
+				<a class="nav-link" href="../upload-bounty/index.html">Upload Bounty</a>
+				<a class="nav-link" href="../bounties/index.html">Bounties</a>
+				<a class="nav-link" href="../wallet/index.html">Wallet</a>
+				<a class="btn" href="../bounties/index.html">Start Hunting</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="hero" style="padding-bottom: 0;">
+			<h1>Upload a Bounty</h1>
+			<p style="color:var(--muted);">Companies: describe your target, specify domains, and set the prize pool.</p>
+		</div>
+		<div class="card" style="max-width: 760px; margin: 0 auto;">
+			<form id="bountyForm">
+				<div style="display:grid; gap:12px; grid-template-columns: 1fr;">
+					<label>
+						<div>Company Name</div>
+						<input class="input" type="text" id="company" required />
+					</label>
+					<label>
+						<div>Target URL</div>
+						<input class="input" type="url" id="url" placeholder="https://example.com" required />
+					</label>
+					<label>
+						<div>Bug Domains (optional)</div>
+						<input class="input" type="text" id="domain" placeholder="Web App, API, Mobile" />
+					</label>
+					<label>
+						<div>Prize Pool (USD)</div>
+						<input class="input" type="number" id="prize" min="100" step="50" required />
+					</label>
+					<div>
+						<button type="submit" class="btn">Create Bounty</button>
+						<a href="../bounties/index.html" class="btn secondary" style="margin-left:8px;">View Bounties</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="footer">© <span id="year"></span> Defend X</div>
+
+	<script src="../shared/storage.js"></script>
+	<script src="./script.js"></script>
+</body>
+</html>

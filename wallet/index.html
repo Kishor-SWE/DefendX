@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Defend X — Wallet</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../shared/styles.css" />
+</head>
+<body>
+	<nav class="nav">
+		<div class="nav-inner container">
+			<div class="brand"><div class="brand-badge"></div> Defend X</div>
+			<div class="nav-links">
+				<a class="nav-link" href="../metamask/index.html">Home</a>
+				<a class="nav-link" href="../leaderboard/index.html">Leaderboard</a>
+				<a class="nav-link" href="../upload-bounty/index.html">Upload Bounty</a>
+				<a class="nav-link" href="../bounties/index.html">Bounties</a>
+				<a class="nav-link" href="../wallet/index.html">Wallet</a>
+				<a class="btn" href="../bounties/index.html">Start Hunting</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="hero" style="padding-bottom: 0;">
+			<h1>Link Wallet / Bank</h1>
+			<p style="color:var(--muted);">Connect your crypto wallet or add bank details for payouts.</p>
+		</div>
+		<div class="grid">
+			<div class="card" style="grid-column: span 6;">
+				<h2 style="margin:0 0 10px;">Metamask</h2>
+				<p style="color:var(--muted);">Connect with Metamask to receive on-chain payouts.</p>
+				<div style="display:flex; gap:8px; align-items:center;">
+					<button class="btn" id="connect">Connect Wallet</button>
+					<div id="address" style="color:var(--muted);"></div>
+				</div>
+			</div>
+			<div class="card" style="grid-column: span 6;">
+				<h2 style="margin:0 0 10px;">Bank Details</h2>
+				<p style="color:var(--muted);">Use a traditional bank account if preferred.</p>
+				<form id="bankForm">
+					<div style="display:grid; gap:12px; grid-template-columns: 1fr 1fr;">
+						<label style="grid-column: span 2;">
+							<div>Account Holder</div>
+							<input class="input" type="text" id="holder" />
+						</label>
+						<label>
+							<div>IBAN / Account</div>
+							<input class="input" type="text" id="iban" />
+						</label>
+						<label>
+							<div>SWIFT / Routing</div>
+							<input class="input" type="text" id="swift" />
+						</label>
+					</div>
+					<div style="height:12px"></div>
+					<button type="submit" class="btn">Save</button>
+				</form>
+				<div id="bankStatus" style="margin-top:8px; color:var(--muted);"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">© <span id="year"></span> Defend X</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.min.js"></script>
+	<script src="../shared/storage.js"></script>
+	<script src="./script.js"></script>
+</body>
+</html>
